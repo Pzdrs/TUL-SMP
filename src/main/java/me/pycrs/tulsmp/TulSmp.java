@@ -13,6 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -20,12 +21,17 @@ import java.util.UUID;
 public final class TulSmp extends JavaPlugin implements Listener {
     private List<UUID> frozenPlayers = new ArrayList<>();
     private List<TulPlayer> registeredPlayers = new ArrayList<>();
+    public static StagAPI stagAPI = new StagAPI("https://stag-ws.tul.cz/ws/services/rest2");
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
         saveDefaultConfig();
         getServer().getPluginManager().registerEvents(this, this);
+        try {
+            System.out.println(StagAPI.asText(stagAPI.student("/getStudentInfo?osCislo=M21000096").getEntity().getContent()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
