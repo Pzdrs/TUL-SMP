@@ -1,0 +1,5 @@
+name: TUL-SMP
+version: '${project.version}'
+main: me.pycrs.tulsmp.TulSmp
+api-version: 1.15
+authors: [ Pycrs ]
