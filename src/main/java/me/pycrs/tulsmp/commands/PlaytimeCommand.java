@@ -8,8 +8,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class PlaytimeCommand implements CommandExecutor {
@@ -30,16 +28,14 @@ public class PlaytimeCommand implements CommandExecutor {
 
 
         if (args.length < 1) {
-            player.sendMessage(Utils.color("&aYou have " + LocalTime.ofSecondOfDay(Utils.getPlayTime(plugin, player, true))
-                    .format(DateTimeFormatter.ofPattern("H 'hours' m 'minutes' s 'seconds'")) + " of playtime."));
+            player.sendMessage(Utils.color(String.format("&aYou have %s of playtime.", Utils.playtimeFormat(Utils.getPlayTime(plugin, player, true)))));
         } else {
             Player target = Bukkit.getPlayer(args[0]);
             if (target == null) {
                 player.sendMessage(Utils.color("&cThis player is not online."));
                 return true;
             }
-            player.sendMessage(Utils.color("&a" + target.getName() + " has " + LocalTime.ofSecondOfDay(Utils.getPlayTime(plugin, player, true))
-                    .format(DateTimeFormatter.ofPattern("H 'hours' m 'minutes' s 'seconds'")) + " of playtime."));
+            player.sendMessage(Utils.color(String.format("&a%s has %s of playtime.", target.getName(), Utils.playtimeFormat(Utils.getPlayTime(plugin, player, true)))));
         }
         return true;
     }
