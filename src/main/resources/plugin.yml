@@ -6,4 +6,4 @@ authors: [ Pycrs ]
 commands:
   playtime:
     description: Playtime command
-    usage: /<command> [player]
+    usage: /<command>
