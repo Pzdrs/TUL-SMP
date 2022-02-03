@@ -26,16 +26,10 @@ public class PlaytimeCommand implements CommandExecutor {
         }
         Player player = (Player) sender;
 
-
         if (args.length < 1) {
-            player.sendMessage(Utils.color(String.format("&aYou have %s of playtime.", Utils.playtimeFormat(Utils.getPlayTime(plugin, player, true)))));
-        } else {
-            Player target = Bukkit.getPlayer(args[0]);
-            if (target == null) {
-                player.sendMessage(Utils.color("&cThis player is not online."));
-                return true;
-            }
-            player.sendMessage(Utils.color(String.format("&a%s has %s of playtime.", target.getName(), Utils.playtimeFormat(Utils.getPlayTime(plugin, player, true)))));
+            player.sendMessage(Utils.color(String.format("\n&7Total playtime: &a%s\n&7Current session: &a%s",
+                    Utils.playtimeFormat(Utils.getPlayTime(plugin, player, false)),
+                    Utils.playtimeFormat(Utils.getSessionPlayTime(player)))));
         }
         return true;
     }
