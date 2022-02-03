@@ -3,3 +3,7 @@ version: '${project.version}'
 main: me.pycrs.tulsmp.TulSmp
 api-version: 1.15
 authors: [ Pycrs ]
+commands:
+  playtime:
+    description: Playtime command
+    usage: /<command> [player]
