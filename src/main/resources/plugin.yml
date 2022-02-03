@@ -7,3 +7,6 @@ commands:
   playtime:
     description: Playtime command
     usage: /<command>
+  whois:
+    description: Who's osobni cislo is this?
+    usage: /<command> <osCislo>

@@ -1,13 +1,22 @@
 package me.pycrs.tulsmp;
 
 import me.pycrs.tulsmp.commands.PlaytimeCommand;
+import me.pycrs.tulsmp.commands.WhoisCommand;
 import me.pycrs.tulsmp.listeners.PlayerJoinQuitListener;
 import me.pycrs.tulsmp.listeners.PlayerMoveListener;
 import me.pycrs.tulsmp.listeners.ServerListPingListener;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -41,6 +50,7 @@ public final class TulSmp extends JavaPlugin implements Listener {
         new ServerListPingListener(this);
 
         new PlaytimeCommand(this);
+        new WhoisCommand(this);
     }
 
     public ConfigurationSection getPlayerData(UUID uuid) {
