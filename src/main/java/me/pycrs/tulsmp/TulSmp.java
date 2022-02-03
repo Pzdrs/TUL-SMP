@@ -3,6 +3,7 @@ package me.pycrs.tulsmp;
 import me.pycrs.tulsmp.commands.PlaytimeCommand;
 import me.pycrs.tulsmp.listeners.PlayerJoinQuitListener;
 import me.pycrs.tulsmp.listeners.PlayerMoveListener;
+import me.pycrs.tulsmp.listeners.ServerListPingListener;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -37,6 +38,7 @@ public final class TulSmp extends JavaPlugin implements Listener {
     private void init() {
         new PlayerJoinQuitListener(this);
         new PlayerMoveListener(this);
+        new ServerListPingListener(this);
 
         new PlaytimeCommand(this);
     }

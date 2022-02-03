@@ -27,9 +27,12 @@ public class PlaytimeCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         if (args.length < 1) {
-            player.sendMessage(Utils.color(String.format("\n&7Total playtime: &a%s\n&7Current session: &a%s",
-                    Utils.playtimeFormat(Utils.getPlayTime(plugin, player, false)),
-                    Utils.playtimeFormat(Utils.getSessionPlayTime(player)))));
+            player.sendMessage(Utils.color(
+                    String.format("\n&7Total playtime: &a%s\n&7Current session: &a%s",
+                            Utils.playtimeFormat(Utils.getPlayTime(plugin, player, false)),
+                            Utils.playtimeFormat(Utils.getSessionPlayTime(player))
+                    )
+            ));
         }
         return true;
     }

@@ -68,4 +68,12 @@ public class Utils {
     public static String playtimeFormat(Long l) {
         return DurationFormatUtils.formatDuration(l, "H 'hours' m 'minutes' s 'seconds'");
     }
+
+    public static String spacing(int spaces) {
+        StringBuilder spacing = new StringBuilder();
+        for (int i = 0; i < spaces; i++) {
+            spacing.append(" ");
+        }
+        return spacing.toString();
+    }
 }
