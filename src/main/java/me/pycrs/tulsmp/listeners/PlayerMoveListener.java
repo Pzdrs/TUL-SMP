@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class PlayerMoveListener implements Listener {
     private TulSmp plugin;
-    private Map<UUID, Long> lastMoves = new HashMap<>();
+    public static Map<UUID, Long> lastMoves = new HashMap<>();
 
     public PlayerMoveListener(TulSmp plugin) {
         this.plugin = plugin;

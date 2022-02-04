@@ -3,6 +3,7 @@ package me.pycrs.tulsmp.listeners;
 import me.pycrs.tulsmp.CustomConfiguration;
 import me.pycrs.tulsmp.TulSmp;
 import me.pycrs.tulsmp.Utils;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -29,7 +30,9 @@ public class PlayerJoinQuitListener implements Listener {
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
-        Utils.updatePlayerPlaytime(plugin, event.getPlayer(), true);
-        TulSmp.afkTracking.remove(event.getPlayer().getUniqueId());
+        Player player = event.getPlayer();
+        Utils.updatePlayerPlaytime(plugin, player, true);
+        TulSmp.afkTracking.remove(player.getUniqueId());
+        PlayerMoveListener.lastMoves.remove(player.getUniqueId());
     }
 }
