@@ -30,5 +30,6 @@ public class PlayerJoinQuitListener implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         Utils.updatePlayerPlaytime(plugin, event.getPlayer(), true);
+        TulSmp.afkTracking.remove(event.getPlayer().getUniqueId());
     }
 }
