@@ -27,7 +27,7 @@ public class PlayerMoveListener implements Listener {
         // AFK handler
         if (lastMoves.containsKey(player.getUniqueId())) {
             long timeBetweenLastMove = System.currentTimeMillis() - lastMoves.get(player.getUniqueId());
-            if (timeBetweenLastMove > TimeUnit.MINUTES.toMillis(5)) {
+            if (timeBetweenLastMove > TimeUnit.SECONDS.toMillis(plugin.getConfig().getInt("afkPeriod", 300))) {
                 Utils.addAfkTime(player, timeBetweenLastMove);
                 player.sendMessage(Utils.color(String.format("&7You have been AFK for the past %s.", Utils.playtimeFormat(timeBetweenLastMove))));
             }

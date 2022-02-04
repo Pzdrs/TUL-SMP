@@ -20,12 +20,12 @@ public class Utils {
      * @param save   Save config automatically
      */
     public static void updatePlayerPlaytime(TulSmp plugin, Player player, boolean save) {
-        ConfigurationSection player_data = plugin.getPlayerData(player.getUniqueId());
+        ConfigurationSection player_data = getPlayerData(player);
         long sessionTime = getSessionPlayTime(player) - TulSmp.afkTracking.getOrDefault(player.getUniqueId(), 0L);
         // If the player has been afk longer than they actually played, don't increment the player's total playtime
         if (sessionTime <= 0) return;
         player_data.set("playtime", player_data.getLong("playtime") + TimeUnit.MILLISECONDS.toSeconds(sessionTime));
-        if (save) plugin.saveConfig();
+        if (save) plugin.getPlayerData().saveConfig();
     }
 
     /**
@@ -44,8 +44,8 @@ public class Utils {
      * @param player Target player
      * @return Playtime, not including current session (millis)
      */
-    public static long getPlayTime(TulSmp plugin, Player player, boolean includeSession) {
-        return TimeUnit.SECONDS.toMillis(plugin.getPlayerData(player.getUniqueId()).getLong("playtime")) + (includeSession ? getSessionPlayTime(player) : 0);
+    public static long getPlayTime(Player player, boolean includeSession) {
+        return TimeUnit.SECONDS.toMillis(getPlayerData(player).getLong("playtime")) + (includeSession ? getSessionPlayTime(player) : 0);
     }
 
     /**
@@ -75,5 +75,9 @@ public class Utils {
             spacing.append(" ");
         }
         return spacing.toString();
+    }
+
+    public static ConfigurationSection getPlayerData(Player player) {
+        return TulSmp.getInstance().getPlayerData().getConfig().getConfigurationSection(player.getUniqueId().toString());
     }
 }

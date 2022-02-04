@@ -1,0 +1,2 @@
+# After how many seconds should the player be tagged as AFK, thus stopping their playtime timer (the afkPeriod included in the subtraction)
+afkPeriod: 300

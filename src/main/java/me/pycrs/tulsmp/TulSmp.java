@@ -5,30 +5,25 @@ import me.pycrs.tulsmp.commands.WhoisCommand;
 import me.pycrs.tulsmp.listeners.PlayerJoinQuitListener;
 import me.pycrs.tulsmp.listeners.PlayerMoveListener;
 import me.pycrs.tulsmp.listeners.ServerListPingListener;
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 public final class TulSmp extends JavaPlugin implements Listener {
+    private static TulSmp instance;
     public static Map<UUID, Long> joinLog = new HashMap<>();
     public static Map<UUID, Long> afkTracking = new HashMap<>();
     public static StagAPI stagAPI = new StagAPI("https://stag-ws.tul.cz/ws/services/rest2");
+    private CustomConfiguration player_data;
 
     @Override
     public void onEnable() {
+        instance = this;
         saveDefaultConfig();
+        this.player_data = new CustomConfiguration(this, "players.yml");
         init();
 
         // Make sure all players are in the join log after reload
@@ -41,7 +36,11 @@ public final class TulSmp extends JavaPlugin implements Listener {
 
         // Make sure playtime gets updated if an unexpected server shutdown/reload occurs
         getServer().getOnlinePlayers().forEach(player -> Utils.updatePlayerPlaytime(this, player, false));
-        saveConfig();
+        player_data.saveConfig();
+    }
+
+    public static TulSmp getInstance() {
+        return instance;
     }
 
     private void init() {
@@ -53,7 +52,7 @@ public final class TulSmp extends JavaPlugin implements Listener {
         new WhoisCommand(this);
     }
 
-    public ConfigurationSection getPlayerData(UUID uuid) {
-        return getConfig().getConfigurationSection("player_data." + uuid);
+    public CustomConfiguration getPlayerData() {
+        return player_data;
     }
 }

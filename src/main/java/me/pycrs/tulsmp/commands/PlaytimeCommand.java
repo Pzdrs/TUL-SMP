@@ -32,7 +32,7 @@ public class PlaytimeCommand implements TabExecutor {
         if (args.length < 1) {
             player.sendMessage(Utils.color(
                     String.format("\n&7Total playtime: &a%s\n&7Current session: &a%s",
-                            Utils.playtimeFormat(Utils.getPlayTime(plugin, player, false)),
+                            Utils.playtimeFormat(Utils.getPlayTime(player, false)),
                             Utils.playtimeFormat(Utils.getSessionPlayTime(player))
                     )
             ));

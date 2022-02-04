@@ -1,5 +1,6 @@
 package me.pycrs.tulsmp.listeners;
 
+import me.pycrs.tulsmp.CustomConfiguration;
 import me.pycrs.tulsmp.TulSmp;
 import me.pycrs.tulsmp.Utils;
 import org.bukkit.event.EventHandler;
@@ -17,11 +18,12 @@ public class PlayerJoinQuitListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
+        CustomConfiguration player_data = plugin.getPlayerData();
         TulSmp.joinLog.put(event.getPlayer().getUniqueId(), System.currentTimeMillis());
 
-        if (!plugin.getConfig().isConfigurationSection("player_data." + event.getPlayer().getUniqueId())) {
-            plugin.getConfig().createSection("player_data." + event.getPlayer().getUniqueId());
-            plugin.saveConfig();
+        if (!player_data.getConfig().isConfigurationSection(event.getPlayer().getUniqueId().toString())) {
+            player_data.getConfig().createSection(event.getPlayer().getUniqueId().toString());
+            player_data.saveConfig();
         }
     }
 
