@@ -44,11 +44,13 @@ public class WhoisCommand implements TabExecutor {
                 return true;
             } else if (response.getStatusLine().getStatusCode() == 200) {
                 JSONObject person = new JSONObject(StagAPI.asText(response.getEntity().getContent()));
+                player.sendMessage("\n");
                 player.sendMessage(formatJsonPair("Osobní číslo", person.getString("osCislo")));
                 player.sendMessage(formatJsonPair("Jméno", person.getString("jmeno")));
                 player.sendMessage(formatJsonPair("Příjmení", person.getString("prijmeni")));
                 player.sendMessage(formatJsonPair("Uživatelské jméno", person.getString("userName")));
-                player.sendMessage(formatJsonPair("Email", person.getString("email")));
+                if (!person.get("email").toString().equals("null"))
+                    player.sendMessage(formatJsonPair("Email", person.getString("email")));
                 player.sendMessage(formatJsonPair("Fakulta", person.getString("fakultaSp")));
                 player.sendMessage(formatJsonPair("Obor", person.getString("nazevSp")));
                 player.sendMessage(formatJsonPair("Forma studia", person.getString("formaSp")));
