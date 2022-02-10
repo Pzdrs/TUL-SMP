@@ -5,6 +5,7 @@ import me.pycrs.tulsmp.TulSmp;
 import me.pycrs.tulsmp.Utils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.message.BasicNameValuePair;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -37,6 +38,7 @@ public class WhoisCommand implements TabExecutor {
             player.sendMessage(Utils.color("&cMissing arguments: osobni cislo"));
             return true;
         }
+
         try {
             CloseableHttpResponse response = TulSmp.stagAPI.get("/student/getStudentInfo", new BasicNameValuePair("osCislo", args[0]));
             if (response.getStatusLine().getStatusCode() == 500) {
