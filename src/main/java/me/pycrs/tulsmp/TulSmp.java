@@ -1,5 +1,6 @@
 package me.pycrs.tulsmp;
 
+import me.pycrs.tulsmp.commands.LastDeathCommand;
 import me.pycrs.tulsmp.commands.PlaytimeCommand;
 import me.pycrs.tulsmp.commands.WhoisCommand;
 import me.pycrs.tulsmp.listeners.*;
@@ -47,9 +48,11 @@ public final class TulSmp extends JavaPlugin implements Listener {
         new ServerListPingListener(this);
         new EntityDeathListener(this);
         new BedEnterLeaveListener(this);
+        new PlayerDeathListener(this);
 
         new PlaytimeCommand(this);
         new WhoisCommand(this);
+        new LastDeathCommand(this);
     }
 
     public CustomConfiguration getPlayerData() {

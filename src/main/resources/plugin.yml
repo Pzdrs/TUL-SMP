@@ -10,3 +10,6 @@ commands:
   whois:
     description: Who's osobni cislo is this?
     usage: /<command> <osCislo>
+  lastDeath:
+    description: Last death
+    usage: /<command>
